@@ -67,12 +67,13 @@ const initialMenuItems: MenuItem[] = [
   },
   {
     id: '2',
-    name: 'Truffle Pasta',
-    description: 'Handmade pasta with black truffle, parmesan, and cream sauce',
-    price: 149,
+    name: 'veg bariyani',
+    description: 'Aromatic basmati rice with mixed vegetables and spices',
+    price: 180,
     category: 'main',
-    image: 'https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg',
-    available: true,
+    image: 'https://media.istockphoto.com/id/1292442851/photo/traditional-hyderabadi-vegetable-veg-dum-biryani-with-mixed-veggies-served-with-mixed-raita.jpg?s=2048x2048&w=is&k=20&c=c37wtHYCYKFOBkAv22hMioLVn7_eGc6VpD4yRQOSLB0=',
+    available: true,  
+
   },
   {
     id: '3',

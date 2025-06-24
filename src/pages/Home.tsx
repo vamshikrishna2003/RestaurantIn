@@ -153,7 +153,7 @@ export default function Home() {
                   <p className="text-gray-600 mb-4">{dish.description}</p>
                   <div className="flex justify-between items-center">
                     <span className="text-2xl font-bold text-primary-600">
-                      ${dish.price}
+                      ₹{dish.price}
                     </span>
                     <Link
                       to="/menu"
