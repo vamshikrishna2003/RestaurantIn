@@ -11,11 +11,11 @@ export default function Cart() {
   const { addOrder } = useAdmin();
   const navigate = useNavigate();
 
-  const updateQuantity = (id: string, quantity: number) => {
+  const updateQuantity = (id, quantity) => {
     dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
   };
 
-  const removeItem = (id: string) => {
+  const removeItem = (id) => {
     dispatch({ type: 'REMOVE_ITEM', payload: id });
   };
 
@@ -41,7 +41,7 @@ export default function Cart() {
     // Clear cart
     dispatch({ type: 'CLEAR_CART' });
 
-    // Show success message (in a real app, this would redirect to a success page)
+    // Show success message
     alert('Order placed successfully! You will receive a confirmation email shortly.');
   };
 
@@ -85,12 +85,11 @@ export default function Cart() {
                   alt={item.name}
                   className="w-20 h-20 object-cover rounded-lg"
                 />
-                
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
                   <p className="text-gray-600 mt-1">{item.description}</p>
                   <p className="text-primary-600 font-semibold mt-2">
-                    ${item.price.toFixed(2)} each
+                    ₹{item.price.toLocaleString("en-IN", { minimumFractionDigits: 2 })} each
                   </p>
                 </div>
 
@@ -101,11 +100,11 @@ export default function Cart() {
                   >
                     <Minus className="h-4 w-4 text-gray-600" />
                   </button>
-                  
+
                   <span className="w-8 text-center font-semibold">
                     {item.quantity}
                   </span>
-                  
+
                   <button
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
                     className="p-1 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
@@ -116,7 +115,7 @@ export default function Cart() {
 
                 <div className="text-right">
                   <p className="text-lg font-semibold text-gray-900">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    ₹{(item.price * item.quantity).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
                   </p>
                   <button
                     onClick={() => removeItem(item.id)}
@@ -133,7 +132,7 @@ export default function Cart() {
             <div className="flex justify-between items-center mb-6">
               <span className="text-lg font-semibold text-gray-900">Total:</span>
               <span className="text-2xl font-bold text-primary-600">
-                ${state.total.toFixed(2)}
+                ₹{state.total.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
               </span>
             </div>
 
@@ -144,7 +143,7 @@ export default function Cart() {
               >
                 Continue Shopping
               </Link>
-              
+
               <button
                 onClick={handleCheckout}
                 className="flex-1 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-md transition-colors"

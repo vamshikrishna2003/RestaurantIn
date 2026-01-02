@@ -40,7 +40,7 @@ export default function AdminDashboard() {
     navigate('/');
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'pending': return 'bg-yellow-100 text-yellow-800';
       case 'confirmed': case 'preparing': return 'bg-blue-100 text-blue-800';
@@ -338,7 +338,7 @@ export default function AdminDashboard() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <select
                           value={order.status}
-                          onChange={(e) => updateOrderStatus(order.id, e.target.value as any)}
+                          onChange={(e) => updateOrderStatus(order.id, e.target.value)}
                           className="text-sm border border-gray-300 rounded px-2 py-1"
                         >
                           <option value="pending">Pending</option>

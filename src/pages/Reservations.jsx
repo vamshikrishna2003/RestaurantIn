@@ -6,6 +6,7 @@ import { useAdmin } from '../context/AdminContext';
 export default function Reservations() {
   const { isAuthenticated } = useAuth();
   const { addReservation } = useAdmin();
+
   const [formData, setFormData] = useState({
     customerName: '',
     customerEmail: '',
@@ -15,6 +16,7 @@ export default function Reservations() {
     guests: 2,
     specialRequests: '',
   });
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,12 +25,12 @@ export default function Reservations() {
     '20:00', '20:30', '21:00', '21:30', '22:00',
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -39,6 +41,8 @@ export default function Reservations() {
     setIsSubmitted(true);
     setIsLoading(false);
   };
+
+  const minDate = new Date().toISOString().split('T')[0];
 
   if (isSubmitted) {
     return (
@@ -66,6 +70,7 @@ export default function Reservations() {
               setIsSubmitted(false);
               setFormData({
                 customerName: '',
+                customerAddress: ' ',
                 customerEmail: '',
                 customerPhone: '',
                 date: '',
@@ -82,8 +87,6 @@ export default function Reservations() {
       </div>
     );
   }
-
-  const minDate = new Date().toISOString().split('T')[0];
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -181,16 +184,14 @@ export default function Reservations() {
                   >
                     <option value="">Select time</option>
                     {timeSlots.map(slot => (
-                      <option key={slot} value={slot}>
-                        {slot}
-                      </option>
+                      <option key={slot} value={slot}>{slot}</option>
                     ))}
                   </select>
                 </div>
 
                 <div>
                   <label htmlFor="guests" className="block text-sm font-medium text-gray-700 mb-2">
-                    <Users className="inline h-4 w-4 mr-1" />
+                    <Users className="inline h-4 w-4 mr-1" /> 
                     Guests *
                   </label>
                   <select
@@ -217,7 +218,7 @@ export default function Reservations() {
                 <textarea
                   id="specialRequests"
                   name="specialRequests"
-                  rows={4}
+                  rows="4"
                   value={formData.specialRequests}
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
@@ -239,7 +240,6 @@ export default function Reservations() {
           <div className="space-y-8">
             <div className="bg-white rounded-lg shadow-lg p-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-6">Restaurant Information</h3>
-              
               <div className="space-y-6">
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">Operating Hours</h4>
@@ -249,15 +249,13 @@ export default function Reservations() {
                     <p>Sunday: 4:00 PM - 9:00 PM</p>
                   </div>
                 </div>
-
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">Contact</h4>
                   <div className="text-gray-600 space-y-1">
-                    <p>Phone:9014541966</p>
-                    <p>Email:guttevamshi@gmail.com</p>
+                    <p>Phone: 9014541966</p>
+                    <p>Email: guttevamshi@gmail.com</p>
                   </div>
                 </div>
-
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">Address</h4>
                   <p className="text-gray-600">

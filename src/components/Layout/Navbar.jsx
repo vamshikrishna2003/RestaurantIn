@@ -11,7 +11,7 @@ export default function Navbar() {
   const { state: cartState } = useCart();
   const { user, isAuthenticated, logout } = useAuth();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path) => location.pathname === path;
 
   const handleLogout = () => {
     logout();
@@ -35,8 +35,8 @@ export default function Navbar() {
             <Link
               to="/"
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive('/') 
-                  ? 'text-primary-600 border-b-2 border-primary-600' 
+                isActive('/')
+                  ? 'text-primary-600 border-b-2 border-primary-600'
                   : 'text-gray-700 hover:text-primary-600'
               }`}
             >
@@ -45,8 +45,8 @@ export default function Navbar() {
             <Link
               to="/menu"
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive('/menu') 
-                  ? 'text-primary-600 border-b-2 border-primary-600' 
+                isActive('/menu')
+                  ? 'text-primary-600 border-b-2 border-primary-600'
                   : 'text-gray-700 hover:text-primary-600'
               }`}
             >
@@ -55,8 +55,8 @@ export default function Navbar() {
             <Link
               to="/reservations"
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive('/reservations') 
-                  ? 'text-primary-600 border-b-2 border-primary-600' 
+                isActive('/reservations')
+                  ? 'text-primary-600 border-b-2 border-primary-600'
                   : 'text-gray-700 hover:text-primary-600'
               }`}
             >
@@ -68,7 +68,7 @@ export default function Navbar() {
               className="relative p-2 text-gray-700 hover:text-primary-600 transition-colors"
             >
               <ShoppingCart className="h-6 w-6" />
-              {cartState.itemCount > 0 && (
+              {cartState?.itemCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-primary-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
                   {cartState.itemCount}
                 </span>
@@ -103,7 +103,7 @@ export default function Navbar() {
               className="relative p-2 text-gray-700 hover:text-primary-600 transition-colors"
             >
               <ShoppingCart className="h-6 w-6" />
-              {cartState.itemCount > 0 && (
+              {cartState?.itemCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-primary-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
                   {cartState.itemCount}
                 </span>
@@ -126,8 +126,8 @@ export default function Navbar() {
             <Link
               to="/"
               className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                isActive('/') 
-                  ? 'text-primary-600 bg-primary-50' 
+                isActive('/')
+                  ? 'text-primary-600 bg-primary-50'
                   : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
               }`}
               onClick={() => setIsOpen(false)}
@@ -137,8 +137,8 @@ export default function Navbar() {
             <Link
               to="/menu"
               className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                isActive('/menu') 
-                  ? 'text-primary-600 bg-primary-50' 
+                isActive('/menu')
+                  ? 'text-primary-600 bg-primary-50'
                   : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
               }`}
               onClick={() => setIsOpen(false)}
@@ -148,15 +148,15 @@ export default function Navbar() {
             <Link
               to="/reservations"
               className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                isActive('/reservations') 
-                  ? 'text-primary-600 bg-primary-50' 
+                isActive('/reservations')
+                  ? 'text-primary-600 bg-primary-50'
                   : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
               }`}
               onClick={() => setIsOpen(false)}
             >
               Reservations
             </Link>
-            
+
             {isAuthenticated ? (
               <div className="border-t border-gray-200 pt-2">
                 <div className="px-3 py-2 text-sm text-gray-700">

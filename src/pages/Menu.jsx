@@ -16,19 +16,17 @@ export default function Menu() {
     { id: 'dessert', name: 'Desserts' },
     { id: 'beverage', name: 'Beverages' },
   ];
-  
-
 
   const filteredItems = useMemo(() => {
     return menuItems.filter(item => {
       const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           item.description.toLowerCase().includes(searchTerm.toLowerCase());
+        item.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
       return matchesSearch && matchesCategory && item.available;
     });
   }, [menuItems, searchTerm, selectedCategory]);
 
-  const addToCart = (item: typeof menuItems[0]) => {
+  const addToCart = (item) => {
     dispatch({
       type: 'ADD_ITEM',
       payload: {
@@ -47,11 +45,11 @@ export default function Menu() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-serif font-bold text-gray-900 mb-4">
-            Our Menu
+            Our Menu 
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Discover our carefully curated selection of dishes, each prepared with 
-            the finest ingredients and culinary expertise
+            the finest ingredients and culinary expertise... 
           </p>
         </div>
 
@@ -109,7 +107,7 @@ export default function Menu() {
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-xl font-semibold text-gray-900">{item.name}</h3>
                   <span className="text-2xl font-bold text-primary-600">
-                      ₹{item.price}
+                    ₹{item.price}
                   </span>
                 </div>
                 
@@ -136,3 +134,7 @@ export default function Menu() {
     </div>
   );
 }
+
+
+
+ 

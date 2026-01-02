@@ -14,17 +14,17 @@ export default function Register() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  
+
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     setError('');
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
@@ -60,9 +60,7 @@ export default function Register() {
       <div className="max-w-md w-full mx-auto">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-serif font-bold text-gray-900 mb-2">
-              Create Account
-            </h1>
+            <h1 className="text-3xl font-serif font-bold text-gray-900 mb-2">Create Account</h1>
             <p className="text-gray-600">Join us for an exceptional dining experience</p>
           </div>
 

@@ -1,37 +1,18 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 
-export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-  description: string;
-}
-
-interface CartState {
-  items: CartItem[];
-  total: number;
-  itemCount: number;
-}
-
-type CartAction =
-  | { type: 'ADD_ITEM'; payload: Omit<CartItem, 'quantity'> }
-  | { type: 'REMOVE_ITEM'; payload: string }
-  | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
-  | { type: 'CLEAR_CART' };
-
-const initialState: CartState = {
+// Initial State
+const initialState = {
   items: [],
   total: 0,
   itemCount: 0,
 };
 
-function cartReducer(state: CartState, action: CartAction): CartState {
+// Reducer function
+function cartReducer(state, action) {
   switch (action.type) {
     case 'ADD_ITEM': {
       const existingItem = state.items.find(item => item.id === action.payload.id);
-      let newItems: CartItem[];
+      let newItems;
 
       if (existingItem) {
         newItems = state.items.map(item =>
@@ -58,11 +39,13 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     }
 
     case 'UPDATE_QUANTITY': {
-      const newItems = state.items.map(item =>
-        item.id === action.payload.id
-          ? { ...item, quantity: Math.max(0, action.payload.quantity) }
-          : item
-      ).filter(item => item.quantity > 0);
+      const newItems = state.items
+        .map(item =>
+          item.id === action.payload.id
+            ? { ...item, quantity: Math.max(0, action.payload.quantity) }
+            : item
+        )
+        .filter(item => item.quantity > 0);
 
       const total = newItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
       const itemCount = newItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -78,12 +61,11 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   }
 }
 
-const CartContext = createContext<{
-  state: CartState;
-  dispatch: React.Dispatch<CartAction>;
-} | null>(null);
+// Create Context
+const CartContext = createContext(null);
 
-export function CartProvider({ children }: { children: ReactNode }) {
+// Provider
+export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   return (
@@ -93,6 +75,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// Hook
 export function useCart() {
   const context = useContext(CartContext);
   if (!context) {

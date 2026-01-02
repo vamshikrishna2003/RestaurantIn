@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import { AdminProvider } from './context/AdminContext';
+
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
+
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Reservations from './pages/Reservations';
@@ -14,15 +16,15 @@ import Register from './pages/Register';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
 
-function App() {
+const App = () => {
   return (
     <AuthProvider>
       <CartProvider>
         <AdminProvider>
           <Router>
-            <div className="min-h-screen bg-white">
+            <div className="min-h-screen bg-white flex flex-col">
               <Navbar />
-              <main>
+              <main className="flex-grow">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/menu" element={<Menu />} />
@@ -41,6 +43,6 @@ function App() {
       </CartProvider>
     </AuthProvider>
   );
-}
+};
 
 export default App;
